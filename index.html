@@ -148,3 +148,37 @@ document.getElementById('search').addEventListener('input', e => {
 
 </body>
 </html>
+
+<script>
+async function loadProducts() {
+  const response = await fetch('products.json'); // only fetch from your file
+  const products = await response.json(); // products from JSON
+  const container = document.getElementById('product-list');
+  container.innerHTML = ''; // clear everything first
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="content">
+          <h2>${p.name}</h2>
+          <p>${p.description}</p>
+          <p><strong>${p.price}</strong></p>
+          <a href="${p.link}" target="_blank">Buy Now</a>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// Load products from JSON only
+loadProducts();
+
+// Optional: search functionality
+document.getElementById('search').addEventListener('input', e => {
+  const input = e.target.value.toLowerCase();
+  document.querySelectorAll('.product-card').forEach(card => {
+    const title = card.querySelector('h2').innerText.toLowerCase();
+    card.style.display = title.includes(input) ? 'block' : 'none';
+  });
+});
+</script>
