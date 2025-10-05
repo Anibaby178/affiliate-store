@@ -1,7 +1,23 @@
-{
-  "name": "🖱️ STRIFF World Map Gaming Mouse Pad – Redefine Your Workspace!",
-  "description": "Extended Size – 800mm x 300mm x 2mm for full keyboard & mouse coverageExtended Size – 800mm x 300mm x 2mm for full keyboard & mouse coverage",
-  "price": "🔥 Great Indian Festival Deal: 87% OFF – Just ₹169!",
-  "link": "https://amzn.to/3WnfvVf",
-  "image": "https://m.media-amazon.com/images/I/81vJJOQkrvL._SL1500_.jpg"
-}
+[
+  {
+    "name": "Mouse Pad",
+    "description": "Add a stylish and functional touch to your desk with this extended-size world map mouse pad — perfect for gaming, work, or study setups.",
+    "price": "Great Indian Festival Deal: 87% OFF – Just ₹169!",
+    "link": "https://amzn.to/3WnfvVf",
+    "image": "blob:https://web.whatsapp.com/710fbe32-34e4-410a-943c-912b6ad8eb44"
+  },
+  {
+    "name": "M MEDLER Epoch Nylon Strolley Duffle Bag",
+    "description": "Spacious, durable, and stylish – your perfect travel companion.",
+    "price": "Great Indian Festival Deal: 87% OFF – Just ₹376",
+    "link": "https://amzn.to/42ZLFK6",
+    "image": "blob:https://web.whatsapp.com/870bc9c4-d321-4fea-a8a9-775288a6ace9"
+  },
+  {
+    "name": "Glowrite LED Writing Board",
+    "description": "Perfect for home reminders, office notes, or a unique gifting option.",
+    "price": "Festive Deal: 62% OFF – Just ₹715",
+    "link": "https://amzn.to/4hbB3y1",
+    "image": "blob:https://web.whatsapp.com/9fbef671-b051-433b-aaa6-003b0ea5800c"
+  }
+]
