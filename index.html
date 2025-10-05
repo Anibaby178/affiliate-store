@@ -4,175 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f6fa;
-  }
-
-  header {
-    background: white;
-    padding: 20px 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    text-align: center;
-  }
-
-  #search {
-    width: 90%;
-    max-width: 500px;
-    padding: 12px 15px;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .product-card {
-    background: white;
-    width: 220px;
-    margin: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  }
-
-  .product-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-
-  .product-card .content {
-    padding: 15px;
-  }
-
-  .product-card h2 {
-    font-size: 16px;
-    margin: 0 0 8px;
-    color: #222;
-  }
-
-  .product-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 0 0 12px;
-  }
-
-  .product-card a {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    background: #4b6cb7;
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .product-card a:hover {
-    background: #182848;
-  }
-
-  @media(max-width:600px){
-    .product-card { width: 90%; }
-  }
+  body { font-family: Arial; background: #f4f4f4; margin:0; }
+  header { background: #1e88e5; color: white; padding: 15px; text-align:center; }
+  .product { background: white; margin: 20px; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .product h2 { margin:0; }
+  .product a { display:inline-block; margin-top:10px; padding:10px; background:#1e88e5; color:white; text-decoration:none; border-radius:5px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>My Affiliate Store</h1>
-  <input type="text" id="search" placeholder="Search products...">
+  <h1>My Store</h1>
 </header>
 
 <main id="product-list">
-  <!-- Products will appear here -->
+  <!-- Products will be loaded here -->
 </main>
 
 <script>
-
-
-// Render products
-function renderProducts(list) {
+async function loadProducts() {
+  const response = await fetch('products.json');
+  const products = await response.json();
   const container = document.getElementById('product-list');
   container.innerHTML = '';
-  list.forEach(p => {
+  products.forEach(p => {
     container.innerHTML += `
-      <div class="product-card">
-        <img src="${p.image}" alt="${p.name}">
-        <div class="content">
-          <h2>${p.name}</h2>
-          <p>${p.description}</p>
-          <a href="${p.link}" target="_blank">Buy Now</a>
-        </div>
+      <div class="product">
+        <h2>${p.name}</h2>
+        <p>${p.description}</p>
+        <a href="${p.link}" target="_blank">Buy Now</a>
       </div>
     `;
   });
 }
-
-renderProducts(products);
-
-// Search functionality
-document.getElementById('search').addEventListener('input', e => {
-  const filtered = products.filter(p => p.name.toLowerCase().includes(e.target.value.toLowerCase()));
-  renderProducts(filtered);
-});
+loadProducts();
 </script>
 
 </body>
 </html>
-
-<script>
-async function loadProducts() {
-  const response = await fetch('products.json'); // only fetch from your file
-  const products = await response.json(); // products from JSON
-  const container = document.getElementById('product-list');
-  container.innerHTML = ''; // clear everything first
-  products.forEach(p => {
-    container.innerHTML += `
-      <div class="product-card">
-        <img src="${p.image}" alt="${p.name}">
-        <div class="content">
-          <h2>${p.name}</h2>
-          <p>${p.description}</p>
-          <p><strong>${p.price}</strong></p>
-          <a href="${p.link}" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    `;
-  });
-}
-
-// Load products from JSON only
-loadProducts();
-
-// Optional: search functionality
-document.getElementById('search').addEventListener('input', e => {
-  const input = e.target.value.toLowerCase();
-  document.querySelectorAll('.product-card').forEach(card => {
-    const title = card.querySelector('h2').innerText.toLowerCase();
-    card.style.display = title.includes(input) ? 'block' : 'none';
-  });
-});
-</script>
