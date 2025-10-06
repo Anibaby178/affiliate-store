@@ -1,95 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopPlus</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopPlus</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+  }
 
-    /* Header */
-    header {
-      background: #1e88e5;
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: bold;
-    }
+  /* Header */
+  header {
+    background: #1e88e5;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+  }
 
-    header .left { font-size: 18px; }
-    header .right { font-size: 22px; }
+  header .left { font-size: 18px; }
+  header .right { font-size: 22px; }
 
-    /* Filter & Search */
+  /* Controls */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    gap: 10px;
+    flex-wrap: nowrap; /* keep in one line */
+  }
+
+  #searchBar {
+    flex: 3; /* search takes more space */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  #categoryFilter {
+    flex: 1; /* category smaller */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  /* Product grid */
+  #product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* default desktop 4 per row */
+    gap: 20px;
+    padding: 20px 30px;
+  }
+
+  .product {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .product img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .product h2 { font-size: 18px; margin: 10px 0 5px 0; }
+  .product p { font-size: 14px; color: #333; }
+  .price { font-weight: bold; margin: 10px 0; color: #1e88e5; font-size: 16px; }
+  .product a {
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 15px;
+    background:#1e88e5;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 1024px) {
+    #product-list { grid-template-columns: repeat(3, 1fr); } /* Tablet 3 per row */
+  }
+
+  @media(max-width: 700px) {
+    #product-list { grid-template-columns: repeat(2, 1fr); } /* Mobile 2 per row */
+
     .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
       gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    #categoryFilter, #searchBar {
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      flex: 1;         /* both take equal space */
-      min-width: 45%;  /* prevent inputs from being too small */
-    }
-
-    /* Product Grid */
-    #product-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 20px 30px;
     }
 
     .product {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
+      padding: 10px;
+      font-size: 14px;
     }
 
-    .product img {
-      max-width: 100%;
-      height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .product h2 { font-size: 18px; margin: 10px 0 5px 0; }
-    .product p { font-size: 14px; color: #333; }
-    .price { font-weight: bold; margin: 10px 0; color: #1e88e5; font-size: 16px; }
-    .product a {
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 15px;
-      background:#1e88e5;
-      color:white;
-      text-decoration:none;
-      border-radius:5px;
-    }
-
-    @media(max-width: 700px) {
-      #product-list { grid-template-columns: 1fr; }
-      .controls {
-        flex-direction: row;   /* keep category + search side by side */
-        flex-wrap: wrap;       /* wrap if needed */
-        gap: 10px;
-      }
-    }
-  </style>
+    .product img { height: 150px; }
+  }
+</style>
 </head>
 <body>
 
@@ -99,6 +117,7 @@
 </header>
 
 <div class="controls">
+  <input type="text" id="searchBar" placeholder="Search products...">
   <select id="categoryFilter">
     <option value="All">All Categories</option>
     <option value="Electronics">Electronics</option>
@@ -109,8 +128,6 @@
     <option value="Beauty">Beauty</option>
     <option value="Gadgets">Gadgets</option>
   </select>
-
-  <input type="text" id="searchBar" placeholder="Search products...">
 </div>
 
 <main id="product-list">
