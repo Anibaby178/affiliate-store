@@ -40,6 +40,8 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
+      flex: 1;         /* both take equal space */
+      min-width: 45%;  /* prevent inputs from being too small */
     }
 
     /* Product Grid */
@@ -81,7 +83,11 @@
 
     @media(max-width: 700px) {
       #product-list { grid-template-columns: 1fr; }
-      .controls { flex-direction: column; gap: 10px; }
+      .controls {
+        flex-direction: row;   /* keep category + search side by side */
+        flex-wrap: wrap;       /* wrap if needed */
+        gap: 10px;
+      }
     }
   </style>
 </head>
