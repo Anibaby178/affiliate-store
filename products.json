@@ -4,27 +4,31 @@
     "description": "Add a stylish and functional touch to your desk with this extended-size world map mouse pad — perfect for gaming, work, or study setups.",
     "price": "Great Indian Festival Deal: 87% OFF – Just ₹169!",
     "link": "https://amzn.to/3WnfvVf",
-    "image": "https://m.media-amazon.com/images/I/61s6d6BxW4L._SX425_.jpg"
+    "image": "https://m.media-amazon.com/images/I/61s6d6BxW4L._SX425_.jpg",
+    "category": "Electronics"
   },
   {
     "name": "M MEDLER Epoch Nylon Strolley Duffle Bag",
     "description": "Spacious, durable, and stylish – your perfect travel companion.",
     "price": "Great Indian Festival Deal: 87% OFF – Just ₹376",
     "link": "https://amzn.to/42ZLFK6",
-    "image": "https://m.media-amazon.com/images/I/41DMYZcvOcL._SY300_SX300_QL70_FMwebp_.jpg"
+    "image": "https://m.media-amazon.com/images/I/41DMYZcvOcL._SY300_SX300_QL70_FMwebp_.jpg",
+    "category": "Home"
   },
   {
     "name": "Glowrite LED Writing Board",
     "description": "Perfect for home reminders, office notes, or a unique gifting option.",
     "price": "Festive Deal: 62% OFF – Just ₹715",
     "link": "https://amzn.to/4hbB3y1",
-    "image": "https://m.media-amazon.com/images/I/51pPLNo2YNL._SY300_SX300_QL70_FMwebp_.jpg"
+    "image": "https://m.media-amazon.com/images/I/51pPLNo2YNL._SY300_SX300_QL70_FMwebp_.jpg",
+    "category": "Accessories"
   },
 {
     "name": "Lymio Hoodie",
     "description": "Hoodies || Sweatshirt for Unisex || Unisex Hoodie",
     "price": "-89% ₹449",
     "link": "https://amzn.to/4nvnc7O",
-    "image": "https://m.media-amazon.com/images/I/71BZ58OS2oL._SY606_.jpg"
+    "image": "https://m.media-amazon.com/images/I/71BZ58OS2oL._SY606_.jpg",
+    "category": "Fashion"
   }
 ]
