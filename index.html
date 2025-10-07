@@ -27,8 +27,20 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 
-  header .left { font-size: 20px; letter-spacing: 0.5px; }
-  header .right { font-size: 24px; }
+  header .title { 
+    font-size: 24px; 
+    letter-spacing: 0.5px; 
+  }
+
+  .profile-icon {
+    font-size: 26px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .profile-icon:hover {
+    transform: scale(1.1);
+  }
 
   /* Controls */
   .controls {
@@ -135,6 +147,70 @@
     box-shadow: 0 3px 10px rgba(30,136,229,0.3);
   }
 
+  /* Profile Modal */
+  .profile-modal {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 25px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 300px;
+    padding: 20px;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .profile-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #1e88e5;
+  }
+
+  .profile-header .info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #1e88e5;
+  }
+
+  .profile-header .info p {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    color: #777;
+  }
+
+  .profile-details {
+    background: #f6f9fc;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .profile-details div {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .profile-details div:last-child {
+    border-bottom: none;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
   /* Responsive */
   @media(max-width: 1024px) {
     #product-list { grid-template-columns: repeat(3, 1fr); }
@@ -142,27 +218,9 @@
 
   @media(max-width: 700px) {
     #product-list { grid-template-columns: repeat(2, 1fr); }
-
-    .controls {
-      padding: 10px 15px;
-      flex-direction: row;
-      gap: 8px;
-    }
-
-    #searchBar, #categoryFilter {
-      font-size: 14px;
-      padding: 10px;
-    }
-
-    .product {
-      padding: 10px;
-      font-size: 14px;
-    }
-
-    .product img { height: 150px; }
   }
 
-  /* Floating Back to Top Button */
+  /* Back to top */
   #topBtn {
     position: fixed;
     bottom: 25px;
@@ -189,8 +247,8 @@
 <body>
 
 <header>
-  <div class="left">My Store</div>
-  <div class="right">ShopPlus</div>
+  <div class="title">ShopPlus</div>
+  <div class="profile-icon" id="profileIcon">👤</div>
 </header>
 
 <div class="controls">
@@ -207,9 +265,23 @@
   </select>
 </div>
 
-<main id="product-list">
-  <!-- Products will be loaded here -->
-</main>
+<main id="product-list"></main>
+
+<!-- Profile Modal -->
+<div class="profile-modal" id="profileModal">
+  <div class="profile-header">
+    <img src="https://i.ibb.co/2tS6kDq/user.png" alt="Profile">
+    <div class="info">
+      <h3>John Doe</h3>
+      <p>Since 2025</p>
+    </div>
+  </div>
+  <div class="profile-details">
+    <div><span>Purchase History</span><span>12 Orders</span></div>
+    <div><span>Total Earnings</span><span>₹2,450</span></div>
+    <div><span>Remaining for Redemption</span><span>₹550</span></div>
+  </div>
+</div>
 
 <button id="topBtn">↑</button>
 
@@ -258,7 +330,15 @@ async function loadProducts() {
 
 loadProducts();
 
-/* Back to top button */
+/* Profile Modal Toggle */
+const profileIcon = document.getElementById('profileIcon');
+const profileModal = document.getElementById('profileModal');
+
+profileIcon.addEventListener('click', () => {
+  profileModal.style.display = (profileModal.style.display === 'block') ? 'none' : 'block';
+});
+
+/* Back to top */
 const topBtn = document.getElementById('topBtn');
 window.addEventListener('scroll', () => {
   topBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
