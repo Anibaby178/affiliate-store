@@ -147,70 +147,6 @@
     box-shadow: 0 3px 10px rgba(30,136,229,0.3);
   }
 
-  /* Profile Modal */
-  .profile-modal {
-    display: none;
-    position: fixed;
-    top: 70px;
-    right: 25px;
-    background: white;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    width: 300px;
-    padding: 20px;
-    z-index: 2000;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-
-  .profile-header img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px solid #1e88e5;
-  }
-
-  .profile-header .info h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #1e88e5;
-  }
-
-  .profile-header .info p {
-    margin: 2px 0 0 0;
-    font-size: 13px;
-    color: #777;
-  }
-
-  .profile-details {
-    background: #f6f9fc;
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  .profile-details div {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 5px;
-    font-size: 15px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .profile-details div:last-child {
-    border-bottom: none;
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-10px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-
   /* Responsive */
   @media(max-width: 1024px) {
     #product-list { grid-template-columns: repeat(3, 1fr); }
@@ -267,22 +203,6 @@
 
 <main id="product-list"></main>
 
-<!-- Profile Modal -->
-<div class="profile-modal" id="profileModal">
-  <div class="profile-header">
-    <img src="https://i.ibb.co/2tS6kDq/user.png" alt="Profile">
-    <div class="info">
-      <h3>John Doe</h3>
-      <p>Since 2025</p>
-    </div>
-  </div>
-  <div class="profile-details">
-    <div><span>Purchase History</span><span>12 Orders</span></div>
-    <div><span>Total Earnings</span><span>₹2,450</span></div>
-    <div><span>Remaining for Redemption</span><span>₹550</span></div>
-  </div>
-</div>
-
 <button id="topBtn">↑</button>
 
 <script>
@@ -330,12 +250,9 @@ async function loadProducts() {
 
 loadProducts();
 
-/* Profile Modal Toggle */
-const profileIcon = document.getElementById('profileIcon');
-const profileModal = document.getElementById('profileModal');
-
-profileIcon.addEventListener('click', () => {
-  profileModal.style.display = (profileModal.style.display === 'block') ? 'none' : 'block';
+/* Redirect to Profile Page */
+document.getElementById('profileIcon').addEventListener('click', () => {
+  window.location.href = 'profile.html';
 });
 
 /* Back to top */
