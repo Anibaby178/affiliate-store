@@ -59,6 +59,7 @@
     border-radius: 50%;
     border: 3px solid #1e88e5;
     margin-bottom: 15px;
+    object-fit: cover;
   }
 
   .profile-container h2 {
@@ -72,43 +73,43 @@
     margin-bottom: 20px;
   }
 
-  .profile-details {
-    text-align: left;
-    margin-top: 20px;
+  input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
   }
 
-  .profile-details h3 {
-    color: #1e88e5;
-    margin-bottom: 10px;
-  }
-
-  .detail-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .detail-row:last-child {
-    border-bottom: none;
-  }
-
-  .logout-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 10px 20px;
+  button {
     background: linear-gradient(90deg, #1e88e5, #42a5f5);
     color: white;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
   }
 
-  .logout-btn:hover {
+  button:hover {
     background: linear-gradient(90deg, #1565c0, #1e88e5);
     box-shadow: 0 3px 10px rgba(30,136,229,0.3);
+  }
+
+  .profile-details {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .profile-details div {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .profile-details div:last-child {
+    border-bottom: none;
   }
 
   /* Back to store link */
@@ -134,44 +135,58 @@
 </header>
 
 <div class="profile-container">
-  <img src="https://i.ibb.co/2tS6kDq/user.png" alt="User Profile">
-  <h2 id="userName">Guest User</h2>
-  <p id="userSince">Member since 2025</p>
+  <img id="profileImage" src="https://i.ibb.co/2tS6kDq/user.png" alt="Profile">
+  <h2 id="profileName">Your Name</h2>
+  <p id="profileSince">Since ...</p>
+
+  <input type="text" id="nameInput" placeholder="Enter your name">
+  <input type="file" id="imageInput" accept="image/*">
+  <button id="saveProfile">Save Profile</button>
 
   <div class="profile-details">
-    <h3>Account Summary</h3>
-    <div class="detail-row"><span>Total Orders</span><span id="totalOrders">0</span></div>
-    <div class="detail-row"><span>Total Cashback</span><span id="totalCashback">₹0</span></div>
-    <div class="detail-row"><span>Pending Cashback</span><span id="pendingCashback">₹0</span></div>
+    <div><span>Purchase History</span><span id="purchaseHistory">0 Orders</span></div>
+    <div><span>Total Earnings</span><span id="totalEarnings">₹0</span></div>
+    <div><span>Remaining for Redemption</span><span id="remainingAmount">₹0</span></div>
   </div>
 
-  <button class="logout-btn" id="logoutBtn">Logout</button>
-  <br>
   <a href="index.html" class="back-link">← Back to Shopping</a>
 </div>
 
 <script>
-// In future, this will come from backend/localStorage.
-// For now, we simulate user data.
-const userData = {
-  name: "Guest User",
-  joined: "October 2025",
-  orders: 0,
-  cashback: 0,
-  pending: 0
-};
+// Load profile from localStorage
+window.addEventListener('DOMContentLoaded', () => {
+  const storedName = localStorage.getItem('userName');
+  const storedImage = localStorage.getItem('userImage');
+  const storedSince = localStorage.getItem('userSince');
 
-// Load user data
-document.getElementById("userName").textContent = userData.name;
-document.getElementById("userSince").textContent = `Member since ${userData.joined}`;
-document.getElementById("totalOrders").textContent = userData.orders;
-document.getElementById("totalCashback").textContent = `₹${userData.cashback}`;
-document.getElementById("redeemable").textContent = `₹${userData.pending}`;
+  if(storedName) document.getElementById('profileName').innerText = storedName;
+  if(storedImage) document.getElementById('profileImage').src = storedImage;
+  if(storedSince) document.getElementById('profileSince').innerText = storedSince;
+  else document.getElementById('profileSince').innerText = 'Since 2025';
 
-// Logout button (temporary)
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  alert("You have been logged out (demo only).");
-  window.location.href = "index.html";
+  document.getElementById('saveProfile').addEventListener('click', () => {
+    const name = document.getElementById('nameInput').value;
+    const imageFile = document.getElementById('imageInput').files[0];
+
+    if(name) {
+      localStorage.setItem('userName', name);
+      document.getElementById('profileName').innerText = name;
+    }
+
+    if(imageFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        localStorage.setItem('userImage', e.target.result);
+        document.getElementById('profileImage').src = e.target.result;
+      }
+      reader.readAsDataURL(imageFile);
+    }
+
+    if(!localStorage.getItem('userSince')) {
+      localStorage.setItem('userSince', 'Since 2025');
+      document.getElementById('profileSince').innerText = 'Since 2025';
+    }
+  });
 });
 </script>
 
