@@ -6,24 +6,29 @@
 <title>ShopPlus</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f6f9fc;
     margin: 0;
+    scroll-behavior: smooth;
   }
 
   /* Header */
   header {
-    background: #1e88e5;
+    background: linear-gradient(90deg, #1e88e5, #42a5f5);
     color: white;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 
-  header .left { font-size: 18px; }
-  header .right { font-size: 22px; }
+  header .left { font-size: 20px; letter-spacing: 0.5px; }
+  header .right { font-size: 24px; }
 
   /* Controls */
   .controls {
@@ -32,72 +37,121 @@
     align-items: center;
     padding: 15px 30px;
     gap: 10px;
-    flex-wrap: nowrap; /* keep in one line */
+    flex-wrap: nowrap;
+    background: white;
+    position: sticky;
+    top: 60px;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
   #searchBar {
-    flex: 3; /* search takes more space */
-    padding: 10px;
+    flex: 3;
+    padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  #searchBar:focus {
+    outline: none;
+    border-color: #1e88e5;
+    box-shadow: 0 0 8px rgba(30,136,229,0.3);
   }
 
   #categoryFilter {
-    flex: 1; /* category smaller */
-    padding: 10px;
+    flex: 1;
+    padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  #categoryFilter:hover {
+    border-color: #42a5f5;
   }
 
   /* Product grid */
   #product-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* default desktop 4 per row */
-    gap: 20px;
-    padding: 20px 30px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 25px 30px;
   }
 
   .product {
     background: white;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   }
 
   .product img {
     max-width: 100%;
     height: 200px;
     object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease;
   }
 
-  .product h2 { font-size: 18px; margin: 10px 0 5px 0; }
-  .product p { font-size: 14px; color: #333; }
-  .price { font-weight: bold; margin: 10px 0; color: #1e88e5; font-size: 16px; }
+  .product:hover img {
+    transform: scale(1.05);
+  }
+
+  .product h2 { font-size: 18px; margin: 10px 0 5px 0; color: #222; }
+  .product p { font-size: 14px; color: #555; min-height: 40px; }
+  .price {
+    font-weight: bold;
+    margin: 10px 0;
+    color: #1e88e5;
+    font-size: 17px;
+  }
+
   .product a {
     display:inline-block;
     margin-top:10px;
     padding:10px 15px;
-    background:#1e88e5;
+    background: linear-gradient(90deg, #1e88e5, #42a5f5);
     color:white;
     text-decoration:none;
-    border-radius:5px;
+    border-radius:6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
 
-  /* Responsive adjustments */
+  .product a:hover {
+    background: linear-gradient(90deg, #1565c0, #1e88e5);
+    box-shadow: 0 3px 10px rgba(30,136,229,0.3);
+  }
+
+  /* Responsive */
   @media(max-width: 1024px) {
-    #product-list { grid-template-columns: repeat(3, 1fr); } /* Tablet 3 per row */
+    #product-list { grid-template-columns: repeat(3, 1fr); }
   }
 
   @media(max-width: 700px) {
-    #product-list { grid-template-columns: repeat(2, 1fr); } /* Mobile 2 per row */
+    #product-list { grid-template-columns: repeat(2, 1fr); }
 
     .controls {
-      gap: 10px;
+      padding: 10px 15px;
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    #searchBar, #categoryFilter {
+      font-size: 14px;
+      padding: 10px;
     }
 
     .product {
@@ -107,6 +161,29 @@
 
     .product img { height: 150px; }
   }
+
+  /* Floating Back to Top Button */
+  #topBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #1e88e5;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    font-size: 18px;
+    transition: 0.3s;
+    display: none;
+  }
+
+  #topBtn:hover {
+    background: #1565c0;
+    transform: translateY(-3px);
+  }
+
 </style>
 </head>
 <body>
@@ -133,6 +210,8 @@
 <main id="product-list">
   <!-- Products will be loaded here -->
 </main>
+
+<button id="topBtn">↑</button>
 
 <script>
 async function loadProducts() {
@@ -178,6 +257,13 @@ async function loadProducts() {
 }
 
 loadProducts();
+
+/* Back to top button */
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', () => {
+  topBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+});
+topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 
 </body>
