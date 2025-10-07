@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | ShopPlus</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f6f9fc;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(90deg, #1e88e5, #42a5f5);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  header .title {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  header a:hover {
+    opacity: 0.8;
+  }
+
+  /* Profile container */
+  .profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+  }
+
+  .profile-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #1e88e5;
+    margin-bottom: 15px;
+  }
+
+  .profile-container h2 {
+    margin: 10px 0 5px 0;
+    color: #1e88e5;
+    font-size: 22px;
+  }
+
+  .profile-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .profile-details {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .profile-details h3 {
+    color: #1e88e5;
+    margin-bottom: 10px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .logout-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #1e88e5, #42a5f5);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .logout-btn:hover {
+    background: linear-gradient(90deg, #1565c0, #1e88e5);
+    box-shadow: 0 3px 10px rgba(30,136,229,0.3);
+  }
+
+  /* Back to store link */
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #1e88e5;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">My Profile</div>
+  <a href="index.html">🏠 Home</a>
+</header>
+
+<div class="profile-container">
+  <img src="https://i.ibb.co/2tS6kDq/user.png" alt="User Profile">
+  <h2 id="userName">Guest User</h2>
+  <p id="userSince">Member since 2025</p>
+
+  <div class="profile-details">
+    <h3>Account Summary</h3>
+    <div class="detail-row"><span>Total Orders</span><span id="totalOrders">0</span></div>
+    <div class="detail-row"><span>Total Cashback</span><span id="totalCashback">₹0</span></div>
+    <div class="detail-row"><span>Pending Cashback</span><span id="pendingCashback">₹0</span></div>
+  </div>
+
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+  <br>
+  <a href="index.html" class="back-link">← Back to Shopping</a>
+</div>
+
+<script>
+// In future, this will come from backend/localStorage.
+// For now, we simulate user data.
+const userData = {
+  name: "Guest User",
+  joined: "October 2025",
+  orders: 0,
+  cashback: 0,
+  pending: 0
+};
+
+// Load user data
+document.getElementById("userName").textContent = userData.name;
+document.getElementById("userSince").textContent = `Member since ${userData.joined}`;
+document.getElementById("totalOrders").textContent = userData.orders;
+document.getElementById("totalCashback").textContent = `₹${userData.cashback}`;
+document.getElementById("pendingCashback").textContent = `₹${userData.pending}`;
+
+// Logout button (temporary)
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  alert("You have been logged out (demo only).");
+  window.location.href = "index.html";
+});
+</script>
+
+</body>
+</html>
