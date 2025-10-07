@@ -166,7 +166,7 @@ document.getElementById("userName").textContent = userData.name;
 document.getElementById("userSince").textContent = `Member since ${userData.joined}`;
 document.getElementById("totalOrders").textContent = userData.orders;
 document.getElementById("totalCashback").textContent = `₹${userData.cashback}`;
-document.getElementById("pendingCashback").textContent = `₹${userData.pending}`;
+document.getElementById("redeemable").textContent = `₹${userData.pending}`;
 
 // Logout button (temporary)
 document.getElementById("logoutBtn").addEventListener("click", () => {
