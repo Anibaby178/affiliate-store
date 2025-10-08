@@ -1,189 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>ShopPlus</title>
 <style>
+  :root{
+    --accent:#1e88e5;
+    --accent-2:#42a5f5;
+    --muted:#555;
+    --bg:#f6f9fc;
+  }
+
   body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f6f9fc;
+    background: var(--bg);
     margin: 0;
     scroll-behavior: smooth;
   }
 
   /* Header */
   header {
-    background: linear-gradient(90deg, #1e88e5, #42a5f5);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
     color: white;
-    padding: 15px 30px;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
+    font-weight: 700;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   }
 
   header .title { 
-    font-size: 24px; 
-    letter-spacing: 0.5px; 
+    font-size: 22px;
   }
 
   .profile-icon {
-    font-size: 26px;
+    font-size: 24px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform .18s;
   }
-
-  .profile-icon:hover {
-    transform: scale(1.1);
-  }
+  .profile-icon:hover { transform: scale(1.06); }
 
   /* Controls */
   .controls {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
     gap: 10px;
-    flex-wrap: nowrap;
+    align-items: center;
+    padding: 12px 16px;
     background: white;
     position: sticky;
-    top: 60px;
+    top: 56px;
     z-index: 999;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   }
 
   #searchBar {
     flex: 3;
-    padding: 12px;
+    padding: 10px 12px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    transition: all 0.3s ease;
-  }
-
-  #searchBar:focus {
-    outline: none;
-    border-color: #1e88e5;
-    box-shadow: 0 0 8px rgba(30,136,229,0.3);
+    border: 1px solid #ddd;
+    font-size: 15px;
   }
 
   #categoryFilter {
     flex: 1;
-    padding: 12px;
+    padding: 10px 12px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+    border: 1px solid #ddd;
+    font-size: 15px;
     background: #fff;
-    transition: all 0.3s ease;
   }
 
-  #categoryFilter:hover {
-    border-color: #42a5f5;
-  }
-
-  /* 🧱 Product grid - new improved design */
+  /* Product grid (desktop first) */
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* Desktop: 4 */
     gap: 18px;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
+  /* Card */
   .product-card {
     background: #fff;
     border-radius: 12px;
     padding: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* keeps actions at bottom */
+    min-height: 260px; /* helps even heights */
     overflow: hidden;
   }
 
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
   }
 
   .product-card img {
     width: 100%;
-    height: 160px;
+    max-width: 220px;
+    height: 120px;
     object-fit: contain;
-    margin-bottom: 8px;
     border-radius: 8px;
+    background: #fff;
+    margin: 6px 0;
   }
 
   .product-card h2 {
     font-size: 15px;
-    margin: 6px 0;
+    margin: 6px 6px 2px;
     color: #222;
+    line-height: 1.2;
+    font-weight: 700;
   }
 
   .product-card p {
     font-size: 13px;
-    color: #555;
-    min-height: 32px;
-    margin: 4px 0 8px;
+    color: var(--muted);
+    margin: 0 8px;
+    line-height: 1.3;
+    max-height: 56px; /* keep description compact */
+    overflow: hidden;
   }
 
   .price {
-    color: #1e88e5;
-    font-weight: bold;
-    margin: 4px 0 8px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    width: 100%;
   }
 
   .btn {
     display: inline-block;
-    padding: 8px 12px;
-    border-radius: 6px;
+    padding: 9px 12px;
+    border-radius: 8px;
     text-decoration: none;
     color: white;
+    font-weight: 700;
     font-size: 13px;
-    font-weight: 600;
-    margin: 3px;
-    transition: all 0.3s ease;
+    box-sizing: border-box;
+    transition: transform .12s, box-shadow .12s;
   }
 
-  .view-details {
-    background: #43a047;
+  .view-details { background: #43a047; } /* green */
+  .view-details:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(67,160,71,0.15); }
+
+  .buy-now { background: var(--accent); }
+  .buy-now:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(30,136,229,0.15); }
+
+  /* small screens: keep cards compact and 2 columns */
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); padding: 18px; }
+    .product-card { min-height: 240px; }
+    .product-card img { height: 110px; max-width: 200px; }
   }
 
-  .view-details:hover {
-    background: #2e7d32;
+  @media (max-width: 700px) {
+    .controls { padding: 10px; gap: 8px; }
+    #searchBar, #categoryFilter { font-size: 14px; padding: 9px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 12px; }
+    .product-card { min-height: 220px; padding: 10px; }
+    .product-card img { height: 100px; max-width: 160px; }
+    .product-card h2 { font-size: 14px; }
+    .product-card p { font-size: 12px; max-height: 48px; }
+    .price { font-size: 13px; }
+    .btn { padding: 8px 10px; font-size: 12px; }
   }
 
-  .buy-now {
-    background: #1e88e5;
+  /* very small phones */
+  @media (max-width: 420px) {
+    header .title { font-size: 20px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
+    .product-card img { height: 90px; }
+    .product-card p { max-height: 44px; }
   }
 
-  .buy-now:hover {
-    background: #1565c0;
-  }
-
-  /* Back to top */
+  /* Back to top button */
   #topBtn {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: #1e88e5;
+    bottom: 20px;
+    right: 18px;
+    background: var(--accent);
     color: white;
     border: none;
-    padding: 10px 14px;
+    padding: 10px 12px;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    font-size: 18px;
-    transition: 0.3s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+    font-size: 16px;
     display: none;
-  }
-
-  #topBtn:hover {
-    background: #1565c0;
-    transform: translateY(-3px);
   }
 </style>
 </head>
@@ -219,34 +244,38 @@ async function loadProducts() {
 
   const searchInput = document.getElementById('searchBar');
   const categorySelect = document.getElementById('categoryFilter');
+  const container = document.getElementById('product-list');
 
-  function displayProducts(filteredProducts) {
-    const container = document.getElementById('product-list');
-    container.innerHTML = '';
-    filteredProducts.forEach(p => {
-      container.innerHTML += `
-        <div class="product-card">
+  function createCard(p) {
+    // use a compact card structure with card-body + actions
+    return `
+      <div class="product-card">
+        <div class="card-body">
           <img src="${p.image}" alt="${p.name}">
           <h2>${p.name}</h2>
           <p>${p.description}</p>
           <div class="price">₹${p.price}</div>
-          <a href="product.html?id=${p.id}" class="btn view-details">View Details</a>
-          <a href="${p.link}" target="_blank" class="btn buy-now">Buy Now</a>
         </div>
-      `;
-    });
+        <div class="card-actions">
+          <a class="btn view-details" href="product.html?id=${p.id}">View Details</a>
+          <a class="btn buy-now" href="${p.link}" target="_blank">Buy Now</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function displayProducts(filteredProducts) {
+    container.innerHTML = filteredProducts.map(p => createCard(p)).join('');
   }
 
   function filterProducts() {
     const searchText = searchInput.value.toLowerCase();
     const category = categorySelect.value;
-
     const filtered = products.filter(p => {
       const matchSearch = p.name.toLowerCase().includes(searchText) || p.description.toLowerCase().includes(searchText);
       const matchCategory = (category === "All") || (p.category === category);
       return matchSearch && matchCategory;
     });
-
     displayProducts(filtered);
   }
 
