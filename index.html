@@ -223,6 +223,7 @@ async function loadProducts() {
           <h2>${p.name}</h2>
           <p>${p.description}</p>
           <div class="price">₹${p.price}</div>
+          <a href="product.html?id=${p.id}" class="view-details">View Details</a>
           <a href="${p.link}" target="_blank">Buy Now</a>
         </div>
       `;
