@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Mouse Pad",
     "description": "Add a stylish and functional touch to your desk with this extended-size world map mouse pad — perfect for gaming, work, or study setups.",
     "price": "Great Indian Festival Deal: 87% OFF – Just ₹169!",
@@ -8,6 +9,7 @@
     "category": "Electronics"
   },
   {
+    "id": 2,
     "name": "M MEDLER Epoch Nylon Strolley Duffle Bag",
     "description": "Spacious, durable, and stylish – your perfect travel companion.",
     "price": "Great Indian Festival Deal: 87% OFF – Just ₹376",
@@ -16,6 +18,7 @@
     "category": "Home"
   },
   {
+    "id": 3,
     "name": "Glowrite LED Writing Board",
     "description": "Perfect for home reminders, office notes, or a unique gifting option.",
     "price": "Festive Deal: 62% OFF – Just ₹715",
@@ -24,6 +27,7 @@
     "category": "Accessories"
   },
   {
+    "id": 4,
     "name": "Lymio Casual Regular Fit Shirt for Men",
     "description": "Casual Shirt for Men|| Shirt for Men|| Men Stylish Shirt Style:Casual Neckline:Collar Sleeve Length:Long Sleeve Reguler Fit.",
     "price": "Great Indian Festival -91% ₹379",
@@ -32,6 +36,7 @@
     "category": "Fashion"
   },
   {
+    "id": 5,
     "name": "TAGDO Men's Loose Fit Solid",
     "description": "For a relaxed weekend look, pair those sneakers with casual pants and a loose-fitting shirt.",
     "price": "Great Indian Festival -79% ₹426",
@@ -40,6 +45,7 @@
     "category": "Fashion"
   },
 {
+    "id": 6,
     "name": "Lymio Hoodie",
     "description": "Hoodies || Sweatshirt for Unisex || Unisex Hoodie",
     "price": "-89% ₹449",
