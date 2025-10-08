@@ -86,74 +86,82 @@
     border-color: #42a5f5;
   }
 
-  /* Product grid */
-  #product-list {
+  /* 🧱 Product grid - new improved design */
+  .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    padding: 25px 30px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    padding: 20px;
   }
 
-  .product {
-    background: white;
-    padding: 15px;
-    border-radius: 14px;
+  .product-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     text-align: center;
     transition: all 0.3s ease;
+    overflow: hidden;
   }
 
-  .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.12);
   }
 
-  .product img {
-    max-width: 100%;
-    height: 200px;
+  .product-card img {
+    width: 100%;
+    height: 160px;
     object-fit: contain;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    transition: transform 0.3s ease;
+    margin-bottom: 8px;
+    border-radius: 8px;
   }
 
-  .product:hover img {
-    transform: scale(1.05);
+  .product-card h2 {
+    font-size: 15px;
+    margin: 6px 0;
+    color: #222;
   }
 
-  .product h2 { font-size: 18px; margin: 10px 0 5px 0; color: #222; }
-  .product p { font-size: 14px; color: #555; min-height: 40px; }
+  .product-card p {
+    font-size: 13px;
+    color: #555;
+    min-height: 32px;
+    margin: 4px 0 8px;
+  }
+
   .price {
-    font-weight: bold;
-    margin: 10px 0;
     color: #1e88e5;
-    font-size: 17px;
+    font-weight: bold;
+    margin: 4px 0 8px;
   }
 
-  .product a {
-    display:inline-block;
-    margin-top:10px;
-    padding:10px 15px;
-    background: linear-gradient(90deg, #1e88e5, #42a5f5);
-    color:white;
-    text-decoration:none;
-    border-radius:6px;
+  .btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
     font-weight: 600;
+    margin: 3px;
     transition: all 0.3s ease;
   }
 
-  .product a:hover {
-    background: linear-gradient(90deg, #1565c0, #1e88e5);
-    box-shadow: 0 3px 10px rgba(30,136,229,0.3);
+  .view-details {
+    background: #43a047;
   }
 
-  /* Responsive */
-  @media(max-width: 1024px) {
-    #product-list { grid-template-columns: repeat(3, 1fr); }
+  .view-details:hover {
+    background: #2e7d32;
   }
 
-  @media(max-width: 700px) {
-    #product-list { grid-template-columns: repeat(2, 1fr); }
+  .buy-now {
+    background: #1e88e5;
+  }
+
+  .buy-now:hover {
+    background: #1565c0;
   }
 
   /* Back to top */
@@ -177,7 +185,6 @@
     background: #1565c0;
     transform: translateY(-3px);
   }
-
 </style>
 </head>
 <body>
@@ -201,7 +208,7 @@
   </select>
 </div>
 
-<main id="product-list"></main>
+<main class="product-grid" id="product-list"></main>
 
 <button id="topBtn">↑</button>
 
@@ -218,13 +225,13 @@ async function loadProducts() {
     container.innerHTML = '';
     filteredProducts.forEach(p => {
       container.innerHTML += `
-        <div class="product">
+        <div class="product-card">
           <img src="${p.image}" alt="${p.name}">
           <h2>${p.name}</h2>
           <p>${p.description}</p>
           <div class="price">₹${p.price}</div>
-          <a href="product.html?id=${p.id}" class="view-details">View Details</a>
-          <a href="${p.link}" target="_blank">Buy Now</a>
+          <a href="product.html?id=${p.id}" class="btn view-details">View Details</a>
+          <a href="${p.link}" target="_blank" class="btn buy-now">Buy Now</a>
         </div>
       `;
     });
@@ -266,4 +273,3 @@ topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoo
 
 </body>
 </html>
-
