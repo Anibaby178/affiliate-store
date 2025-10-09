@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ShopPlus Gadgets</title>
+  <title>Shop+</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -14,6 +14,9 @@
       --accent: #0099ff;
       --accent-dark: #0047ab;
       --accent-pill: #f3f6fe;
+      --logo-bg: #fff;
+      --logo-shadow: rgba(0,71,171,0.12);
+      --logo-accent: #0099ff;
       --text-dark: #1f1f1f;
       --text-light: #fff;
     }
@@ -28,12 +31,30 @@
 
     .main-header {
       background: var(--gradient);
-      color: var(--text-light);
-      font-size: 2rem;
-      font-weight: 600;
-      padding: 18px 0 12px 0;
       text-align: center;
+      padding: 18px 0 12px 0;
       letter-spacing: 0.5px;
+    }
+    /* Professional Shop+ logo style */
+    .shopplus-logo {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      background: var(--logo-bg);
+      padding: 0 28px 0 18px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px var(--logo-shadow);
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .shopplus-logo .plus {
+      color: var(--logo-accent);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-left: 4px;
+      vertical-align: baseline;
     }
 
     .search-section {
@@ -213,7 +234,6 @@
     .buy-now { background: var(--accent); }
     .buy-now:hover { background: #006cc0; }
 
-    /* Scrollbar for product row */
     .product-row::-webkit-scrollbar {
       height: 8px;
       background: #eee;
@@ -224,6 +244,7 @@
     }
     @media (max-width: 600px) {
       .main-header { font-size: 1.2rem; padding: 13px 0; }
+      .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; }
       .section-title { margin-left: 10px; font-size: 1rem; }
       .product-row { padding-left: 7px; }
       .product-card { min-width: 170px; padding: 10px 7px; }
@@ -231,7 +252,11 @@
   </style>
 </head>
 <body>
-  <div class="main-header">ShopPlus Gadgets</div>
+  <div class="main-header">
+    <span class="shopplus-logo">
+      Shop<span class="plus">+</span>
+    </span>
+  </div>
   
   <div class="search-section">
     <div class="headline">
@@ -278,7 +303,7 @@
         allProducts = await response.json();
         displayProducts(allProducts);
       } catch (err) {
-        document.getElementById('product-list').innerHTML = <p style="text-align:center;color:red;">Error loading products. Check products.json</p>;
+        document.getElementById('product-list').innerHTML = `<p style="text-align:center;color:red;">Error loading products. Check products.json</p>`;
         console.error(err);
       }
     }
