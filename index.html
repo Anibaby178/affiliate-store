@@ -19,7 +19,6 @@
       --text-dark: #1f1f1f;
       --text-light: #fff;
     }
-
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg-light);
@@ -27,7 +26,7 @@
       color: var(--text-dark);
       min-height: 100vh;
     }
-
+    /* Header: perfect left logo */
     .main-header {
       background: var(--gradient);
       padding: 16px 0 10px 0;
@@ -41,10 +40,11 @@
       font-weight: 700;
       color: var(--accent-dark);
       background: var(--logo-bg);
-      padding: 0 28px 0 18px;
+      padding: 0 24px 0 20px;
       border-radius: 14px;
       box-shadow: 0 4px 14px var(--logo-shadow);
       letter-spacing: 0.5px;
+      margin-left: 12px;
     }
     .shopplus-logo .plus {
       color: var(--logo-accent);
@@ -131,7 +131,6 @@
     @media (max-width: 650px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     .product-card {
       background: #fff;
       border-radius: 14px;
@@ -199,7 +198,7 @@
     .buy-now:hover { background: #006cc0; }
     @media (max-width: 600px) {
       .main-header { font-size: 1.2rem; padding: 13px 0; }
-      .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; }
+      .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; margin-left: 6px;}
     }
   </style>
 </head>
@@ -244,7 +243,7 @@
         allProducts = await response.json();
         displayProducts(allProducts);
       } catch (err) {
-        document.getElementById('product-list').innerHTML = <p style="text-align:center;color:red;">Error loading products. Check products.json</p>;
+        document.getElementById('product-list').innerHTML = `<p style="text-align:center;color:red;">Error loading products. Check products.json</p>`;
         console.error(err);
       }
     }
@@ -265,7 +264,11 @@
     }
 
     function displayProducts(prodArr) {
-      document.getElementById('product-list').innerHTML = prodArr.map(createCard).join('');
+      if (prodArr.length === 0) {
+        document.getElementById('product-list').innerHTML = `<p style="text-align:center; color:#888;">No products found.</p>`;
+      } else {
+        document.getElementById('product-list').innerHTML = prodArr.map(createCard).join('');
+      }
     }
 
     function filterProducts() {
@@ -282,7 +285,7 @@
     document.getElementById('searchBar').addEventListener('input', filterProducts);
     document.getElementById('categoryFilter').addEventListener('change', filterProducts);
 
-    loadProducts();
+    window.addEventListener("DOMContentLoaded", loadProducts);
   </script>
 </body>
 </html>
