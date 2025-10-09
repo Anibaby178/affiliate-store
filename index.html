@@ -26,6 +26,7 @@
       color: var(--text-dark);
       min-height: 100vh;
     }
+    /* Left-aligned header */
     .main-header {
       background: var(--gradient);
       padding: 16px 0 10px 0;
@@ -55,12 +56,12 @@
     .search-section {
       background: var(--bg-deep);
       padding: 30px 0 20px 0;
-      text-align: center;
       color: var(--text-light);
       box-shadow: 0 2px 16px #0047ab22;
       display: flex;
       justify-content: center;
     }
+    /* Only search and dropdown in row */
     .search-form {
       display: flex;
       justify-content: center;
@@ -79,29 +80,11 @@
       box-shadow: 0 1px 6px rgba(0,0,0,0.07);
       min-width: 140px;
     }
+    .search-form select {
+      min-width: 120px;
+    }
     .search-form button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 13px 20px;
-      font-size: 19px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #0047ab65;
-      transition: background .16s;
-    }
-    .search-form button:hover {
-      background: var(--accent-dark);
-    }
-
-    /* Compact section title, removed view all button */
-    .section-title {
-      font-size: 1.36rem;
-      color: var(--accent-dark);
-      font-weight: 600;
-      margin: 30px 0 18px 20px;
-      letter-spacing: 0.2px;
-      text-align: left;
+      display: none;
     }
 
     /* Responsive Product Grid */
@@ -110,10 +93,6 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
       padding: 0 20px 32px;
-      margin-bottom: 10px;
-      background: transparent;
-      box-sizing: border-box;
-      justify-content: center;
     }
     @media (max-width: 1100px) {
       .product-grid { grid-template-columns: repeat(3, 1fr); }
@@ -121,11 +100,12 @@
     @media (max-width: 650px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    /* Large image card style */
     .product-card {
       background: #fff;
       border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(67,160,71,0.17);
-      padding: 18px 14px;
+      box-shadow: 0 4px 16px rgba(0,71,171,0.16);
+      padding: 22px 16px 16px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -139,16 +119,17 @@
       box-shadow: 0 8px 22px #0047ab23;
     }
     .product-card img {
-      width: 98px;
-      height: 98px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
-      border-radius: 10px;
-      margin-bottom: 11px;
+      border-radius: 12px;
+      margin-bottom: 10px;
       background: #f2f4fc;
-      padding: 5px;
+      padding: 7px;
+      box-sizing: border-box;
     }
     .product-card h2 {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       color: #0047ab;
       margin: 0 0 8px 0;
@@ -157,9 +138,9 @@
       line-height: 1.25;
     }
     .product-card .price {
-      font-size: 17px;
+      font-size: 19px;
       color: #0099ff;
-      font-weight: 600;
+      font-weight: 700;
       margin: 0 0 0 0;
     }
     .card-actions {
@@ -188,9 +169,9 @@
     @media (max-width: 600px) {
       .main-header { font-size: 1.2rem; padding: 13px 0; }
       .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; margin-left: 6px;}
-      .product-card img { width:70px; height:70px;}
+      .product-card img { width:120px; height:120px;}
       .product-card h2 { font-size: 14px;}
-      .product-card .price { font-size: 15px;}
+      .product-card .price { font-size: 16px;}
     }
   </style>
 </head>
@@ -214,18 +195,15 @@
         <option value="Beauty">Beauty</option>
         <option value="Gadgets">Gadgets</option>
       </select>
-      <button type="submit">🔍</button>
     </form>
   </div>
 
-  <div class="section-title">Latest <span style="color:#0099ff">Phones</span></div>
   <div class="product-grid" id="product-list">
     <p style="text-align:center; color:#777;">Loading products...</p>
   </div>
 
   <script>
     let allProducts = [];
-
     async function loadProducts() {
       try {
         const response = await fetch('products.json');
