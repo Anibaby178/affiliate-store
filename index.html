@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shop+</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --gradient: linear-gradient(120deg,#0047ab 60%,#0099ff 100%);
@@ -26,7 +25,6 @@
       color: var(--text-dark);
       min-height: 100vh;
     }
-    /* Left-aligned header */
     .main-header {
       background: var(--gradient);
       padding: 16px 0 10px 0;
@@ -61,7 +59,6 @@
       display: flex;
       justify-content: center;
     }
-    /* Only search and dropdown in row */
     .search-form {
       display: flex;
       justify-content: center;
@@ -83,16 +80,15 @@
     .search-form select {
       min-width: 120px;
     }
-    .search-form button {
-      display: none;
-    }
+    .search-form button { display: none; }
 
-    /* Responsive Product Grid */
+    /* Responsive Product Grid with gap on top */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      padding: 0 20px 32px;
+      gap: 20px;
+      padding: 20px 20px 32px;
+      margin-top: 20px;
     }
     @media (max-width: 1100px) {
       .product-grid { grid-template-columns: repeat(3, 1fr); }
@@ -100,7 +96,6 @@
     @media (max-width: 650px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    /* Large image card style */
     .product-card {
       background: #fff;
       border-radius: 14px;
@@ -119,29 +114,29 @@
       box-shadow: 0 8px 22px #0047ab23;
     }
     .product-card img {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       object-fit: contain;
       border-radius: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       background: #f2f4fc;
-      padding: 7px;
+      padding: 8px;
       box-sizing: border-box;
     }
     .product-card h2 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
       color: #0047ab;
-      margin: 0 0 8px 0;
+      margin: 0 0 10px 0;
       text-align: center;
       white-space: normal;
-      line-height: 1.25;
+      line-height: 1.2;
     }
     .product-card .price {
-      font-size: 19px;
+      font-size: 20px;
       color: #0099ff;
       font-weight: 700;
-      margin: 0 0 0 0;
+      margin-bottom: 5px;
     }
     .card-actions {
       display: flex;
@@ -170,8 +165,8 @@
       .main-header { font-size: 1.2rem; padding: 13px 0; }
       .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; margin-left: 6px;}
       .product-card img { width:120px; height:120px;}
-      .product-card h2 { font-size: 14px;}
-      .product-card .price { font-size: 16px;}
+      .product-card h2 { font-size: 13px;}
+      .product-card .price { font-size: 17px;}
     }
   </style>
 </head>
@@ -181,7 +176,6 @@
       Shop<span class="plus">+</span>
     </span>
   </div>
-  
   <div class="search-section">
     <form class="search-form" onsubmit="event.preventDefault(); filterProducts();">
       <input type="text" id="searchBar" placeholder="Search for phones, gadgets, etc.">
@@ -197,11 +191,9 @@
       </select>
     </form>
   </div>
-
   <div class="product-grid" id="product-list">
     <p style="text-align:center; color:#777;">Loading products...</p>
   </div>
-
   <script>
     let allProducts = [];
     async function loadProducts() {
@@ -215,7 +207,6 @@
         console.error(err);
       }
     }
-
     function createCard(p) {
       return `
       <div class="product-card">
@@ -229,7 +220,6 @@
       </div>
       `;
     }
-
     function displayProducts(prodArr) {
       if (prodArr.length === 0) {
         document.getElementById('product-list').innerHTML = `<p style="text-align:center; color:#888;">No products found.</p>`;
@@ -237,7 +227,6 @@
         document.getElementById('product-list').innerHTML = prodArr.map(createCard).join('');
       }
     }
-
     function filterProducts() {
       const searchText = document.getElementById('searchBar').value.toLowerCase();
       const category = document.getElementById('categoryFilter').value;
@@ -248,7 +237,6 @@
       });
       displayProducts(filtered);
     }
-
     document.getElementById('searchBar').addEventListener('input', filterProducts);
     document.getElementById('categoryFilter').addEventListener('change', filterProducts);
 
