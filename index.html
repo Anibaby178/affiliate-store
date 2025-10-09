@@ -13,7 +13,6 @@
       --bg-light: #f8f9fb;
       --accent: #0099ff;
       --accent-dark: #0047ab;
-      --accent-pill: #f3f6fe;
       --logo-bg: #fff;
       --logo-shadow: rgba(0,71,171,0.12);
       --logo-accent: #0099ff;
@@ -31,12 +30,12 @@
 
     .main-header {
       background: var(--gradient);
-      text-align: center;
-      padding: 18px 0 12px 0;
-      letter-spacing: 0.5px;
+      padding: 16px 0 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
     .shopplus-logo {
-      display: inline-block;
       font-family: 'Poppins', sans-serif;
       font-size: 2.2rem;
       font-weight: 700;
@@ -46,7 +45,6 @@
       border-radius: 14px;
       box-shadow: 0 4px 14px var(--logo-shadow);
       letter-spacing: 0.5px;
-      position: relative;
     }
     .shopplus-logo .plus {
       color: var(--logo-accent);
@@ -58,34 +56,19 @@
 
     .search-section {
       background: var(--bg-deep);
-      padding: 32px 0 20px 0;
+      padding: 30px 0 20px 0;
       text-align: center;
       color: var(--text-light);
       box-shadow: 0 2px 16px #0047ab22;
+      display: flex;
+      justify-content: center;
     }
-    .search-section .headline {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-    .search-section .headline .highlighted {
-      background: #0099ff;
-      padding: 2px 8px;
-      border-radius: 7px;
-      color: #fff;
-      font-size: 1.25em;
-      box-shadow: 0 1px 8px #0047ab46;
-      display: inline-block;
-      margin: 0 3px;
-    }
-
     .search-form {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 0;
     }
     .search-form input, .search-form select {
       border-radius: 8px;
@@ -112,31 +95,6 @@
     .search-form button:hover {
       background: var(--accent-dark);
     }
-    .trend-tags {
-      margin-top: 6px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .trend {
-      background: var(--accent);
-      color: white;
-      border-radius: 25px;
-      padding: 8px 20px;
-      font-weight: 600;
-      margin-right: 9px;
-      font-size: 15px;
-    }
-    .tag {
-      background: var(--accent-pill);
-      color: var(--accent-dark);
-      border-radius: 25px;
-      padding: 8px 16px;
-      font-weight: 500;
-      font-size: 15px;
-    }
     .section-title {
       font-size: 1.36rem;
       color: var(--accent-dark);
@@ -145,7 +103,6 @@
       letter-spacing: 0.2px;
       text-align: left;
     }
-
     .view-all-btn {
       float: right;
       margin-right: 24px;
@@ -168,11 +125,9 @@
       box-sizing: border-box;
       justify-content: center;
     }
-    /* Tablet: 3 columns */
     @media (max-width: 1100px) {
       .product-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    /* Mobile: 2 columns */
     @media (max-width: 650px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -256,9 +211,6 @@
   </div>
   
   <div class="search-section">
-    <div class="headline">
-      Simplify Your <span class="highlighted">Phone</span> Search!
-    </div>
     <form class="search-form" onsubmit="event.preventDefault(); filterProducts();">
       <input type="text" id="searchBar" placeholder="Search for phones, gadgets, etc.">
       <select id="categoryFilter">
@@ -273,14 +225,6 @@
       </select>
       <button type="submit">🔍</button>
     </form>
-    <div class="trend-tags">
-      <span class="trend">Trending</span>
-      <span class="tag">Apple iPhone 16</span>
-      <span class="tag">Apple iPhone 17</span>
-      <span class="tag">Google Pixel 9</span>
-      <span class="tag">CMF Phone 2 Pro</span>
-      <span class="tag">iQOO</span>
-    </div>
   </div>
 
   <div class="section-title">Latest <span style="color:#0099ff">Phones</span>
@@ -300,7 +244,7 @@
         allProducts = await response.json();
         displayProducts(allProducts);
       } catch (err) {
-        document.getElementById('product-list').innerHTML = `<p style="text-align:center;color:red;">Error loading products. Check products.json</p>`;
+        document.getElementById('product-list').innerHTML = <p style="text-align:center;color:red;">Error loading products. Check products.json</p>;
         console.error(err);
       }
     }
