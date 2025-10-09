@@ -35,7 +35,6 @@
       padding: 18px 0 12px 0;
       letter-spacing: 0.5px;
     }
-    /* Professional Shop+ logo style */
     .shopplus-logo {
       display: inline-block;
       font-family: 'Poppins', sans-serif;
@@ -158,16 +157,18 @@
       font-weight: 500;
     }
 
-    /* Horizontally scrollable product list */
-    .product-row {
-      display: flex;
+    /* 2-column product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-      overflow-x: auto;
-      padding-left: 20px;
-      margin-bottom: 32px;
+      padding: 0 20px 32px;
+      margin-bottom: 10px;
+      background: transparent;
+      box-sizing: border-box;
+      justify-content: center;
     }
     .product-card {
-      min-width: 220px;
       background: #fff;
       border-radius: 14px;
       box-shadow: 0 4px 16px rgba(67,160,71,0.17);
@@ -176,7 +177,6 @@
       flex-direction: column;
       align-items: center;
       transition: transform 0.18s;
-      margin-bottom: 0;
       position: relative;
     }
     .product-card:hover {
@@ -233,21 +233,13 @@
     .view-details:hover { background: #38733b; }
     .buy-now { background: var(--accent); }
     .buy-now:hover { background: #006cc0; }
-
-    .product-row::-webkit-scrollbar {
-      height: 8px;
-      background: #eee;
-    }
-    .product-row::-webkit-scrollbar-thumb {
-      background: #c1d8ff;
-      border-radius: 6px;
+    @media (max-width: 800px) {
+      .product-grid { grid-template-columns: 1fr; padding-left: 8px; padding-right: 8px; }
+      .section-title { font-size: 1.05rem; margin-left: 10px; }
     }
     @media (max-width: 600px) {
       .main-header { font-size: 1.2rem; padding: 13px 0; }
       .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; }
-      .section-title { margin-left: 10px; font-size: 1rem; }
-      .product-row { padding-left: 7px; }
-      .product-card { min-width: 170px; padding: 10px 7px; }
     }
   </style>
 </head>
@@ -289,7 +281,7 @@
   <div class="section-title">Latest <span style="color:#0099ff">Phones</span>
     <button class="view-all-btn" onclick="window.location.href='#'">View all →</button>
   </div>
-  <div class="product-row" id="product-list">
+  <div class="product-grid" id="product-list">
     <p style="text-align:center; color:#777;">Loading products...</p>
   </div>
 
