@@ -82,7 +82,7 @@
     }
     .search-form button { display: none; }
 
-    /* Responsive Product Grid with gap on top */
+    /* Product grid with margin above */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -96,32 +96,31 @@
     @media (max-width: 650px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    /* Product card block with fixed height, image covers 70% */
     .product-card {
       background: #fff;
       border-radius: 14px;
       box-shadow: 0 4px 16px rgba(0,71,171,0.16);
-      padding: 22px 16px 16px 16px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       transition: transform 0.18s;
       position: relative;
-      min-height: 230px;
-      justify-content: center;
-    }
-    .product-card:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 8px 22px #0047ab23;
+      justify-content: flex-start;
+      height: 310px;
     }
     .product-card img {
-      width: 160px;
-      height: 160px;
+      height: 70%;
+      width: auto;
+      max-width: 92%;
       object-fit: contain;
       border-radius: 12px;
-      margin-bottom: 12px;
       background: #f2f4fc;
       padding: 8px;
       box-sizing: border-box;
+      display: block;
+      margin: 0 auto 10px auto;
     }
     .product-card h2 {
       font-size: 16px;
@@ -131,12 +130,14 @@
       text-align: center;
       white-space: normal;
       line-height: 1.2;
+      flex: none;
     }
     .product-card .price {
       font-size: 20px;
       color: #0099ff;
       font-weight: 700;
       margin-bottom: 5px;
+      margin-top: auto;
     }
     .card-actions {
       display: flex;
@@ -164,7 +165,8 @@
     @media (max-width: 600px) {
       .main-header { font-size: 1.2rem; padding: 13px 0; }
       .shopplus-logo { font-size: 1.3rem; padding: 0 12px 0 7px; margin-left: 6px;}
-      .product-card img { width:120px; height:120px;}
+      .product-card { height: 210px;}
+      .product-card img { height: 70%; }
       .product-card h2 { font-size: 13px;}
       .product-card .price { font-size: 17px;}
     }
