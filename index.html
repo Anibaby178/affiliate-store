@@ -121,8 +121,6 @@
       }
     }
 
-    /* NO single column for mobile, always 2! */
-
     .product-card {
       background: #fff;
       border-radius: 14px;
@@ -132,7 +130,7 @@
       flex-direction: column;
       align-items: center;
       transition: transform 0.18s;
-      justify-content: space-between;
+      justify-content: flex-start;
       height: 320px;
       box-sizing: border-box;
     }
@@ -168,15 +166,17 @@
 
     .card-actions {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin-top: 10px;
-      width: 90%;
+      gap: 10px;
+      margin-top: auto;
+      width: 100%;
     }
 
     .btn {
-      flex: 1;
-      max-width: 140px;
+      flex: 1 1 40%;
+      min-width: 90px;
+      max-width: 150px;
       padding: 10px 0;
       border-radius: 7px;
       text-decoration: none;
@@ -188,20 +188,18 @@
       cursor: pointer;
       outline: none;
       text-align: center;
+      box-sizing: border-box;
     }
 
     .view-details {
       background: #43a047;
     }
-
     .view-details:hover {
       background: #38733b;
     }
-
     .buy-now {
       background: var(--accent);
     }
-
     .buy-now:hover {
       background: #006cc0;
     }
@@ -218,6 +216,7 @@
       }
       .product-card {
         height: 200px;
+        padding: 10px;
       }
       .product-card img {
         height: 65%;
@@ -226,23 +225,22 @@
         font-size: 13px;
       }
       .card-actions {
-        gap: 6px;
+        flex-direction: column;
+        gap: 8px;
       }
       .btn {
-        font-size: 11px;
-        max-width: 80px;
-        padding: 7px 0;
+        font-size: 12px;
+        padding: 9px 0;
+        min-width: 85px;
+        max-width: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="main-header">
-    <span class="shopplus-logo">
-      Shop<span class="plus">+</span>
-    </span>
+    <span class="shopplus-logo">Shop<span class="plus">+</span></span>
   </div>
-
   <div class="search-section">
     <form class="search-form" onsubmit="event.preventDefault(); filterProducts();">
       <input type="text" id="searchBar" placeholder="Search for phones, gadgets, etc." />
